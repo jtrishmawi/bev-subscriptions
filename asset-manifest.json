@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.js": "/bev-subscriptions/static/js/main.fe9591f3.chunk.js",
-    "main.js.map": "/bev-subscriptions/static/js/main.fe9591f3.chunk.js.map",
+    "main.js": "/bev-subscriptions/static/js/main.3ee64458.chunk.js",
+    "main.js.map": "/bev-subscriptions/static/js/main.3ee64458.chunk.js.map",
     "runtime-main.js": "/bev-subscriptions/static/js/runtime-main.34e75887.js",
     "runtime-main.js.map": "/bev-subscriptions/static/js/runtime-main.34e75887.js.map",
     "static/js/2.51031fa2.chunk.js": "/bev-subscriptions/static/js/2.51031fa2.chunk.js",
     "static/js/2.51031fa2.chunk.js.map": "/bev-subscriptions/static/js/2.51031fa2.chunk.js.map",
     "index.html": "/bev-subscriptions/index.html",
-    "precache-manifest.4eacc7dcfcd909c09ce4625ddc6a5279.js": "/bev-subscriptions/precache-manifest.4eacc7dcfcd909c09ce4625ddc6a5279.js",
+    "precache-manifest.68cd1658410a79a28284a7a8e3eef3c8.js": "/bev-subscriptions/precache-manifest.68cd1658410a79a28284a7a8e3eef3c8.js",
     "service-worker.js": "/bev-subscriptions/service-worker.js",
     "static/js/2.51031fa2.chunk.js.LICENSE.txt": "/bev-subscriptions/static/js/2.51031fa2.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.34e75887.js",
     "static/js/2.51031fa2.chunk.js",
-    "static/js/main.fe9591f3.chunk.js"
+    "static/js/main.3ee64458.chunk.js"
   ]
 }
