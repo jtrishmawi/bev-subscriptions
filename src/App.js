@@ -58,7 +58,7 @@ function App() {
 
   useEffect(() => {
     (async () => {
-      const request = await fetch(process.env.NODE_ENV ===  "production" ? "http://www.bellevillenvrai.fr/api/forms" : "/api/forms");
+      const request = await fetch(process.env.NODE_ENV ===  "production" ? "https://cors-anywhere.herokuapp.com/http://www.bellevillenvrai.fr/api/forms" : "/api/forms");
       const response = await request.json();
       const data = response.data
         .map((submission) => {
