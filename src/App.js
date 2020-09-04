@@ -37,9 +37,9 @@ const Main = styled.main`
     line-height: 1.1rem;
   }
   
-  @media (min-width: 480px) {
+  @media (min-width: 640px) {
     & {
-      grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(640px, 1fr));
     }
   }
 `;
