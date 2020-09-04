@@ -5,7 +5,7 @@
   "homepage": "https://jtrishmawi.github.io/bev-subscriptions/",
   "scripts": {
     "build": "react-scripts build",
-    "predeploy": "yarn build",
+    "predeploy": "NODE_ENV=production yarn build",
     "deploy": "gh-pages -d build",
     "eject": "react-scripts eject",
     "start": "react-scripts start",
