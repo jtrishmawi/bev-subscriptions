@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "1b03f2fb522e9e5d666bef36c990a3cb",
+    "revision": "82d49b7a5abe2b6cd240c96b5558966e",
     "url": "/bev-subscriptions/index.html"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/bev-subscriptions/static/js/2.51031fa2.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "4f674fe7aa352a425f56",
-    "url": "/bev-subscriptions/static/js/main.db152021.chunk.js"
+    "revision": "16a855fc6a696ab97378",
+    "url": "/bev-subscriptions/static/js/main.6015b208.chunk.js"
   },
   {
     "revision": "95154b831fc4e341d9d4",
