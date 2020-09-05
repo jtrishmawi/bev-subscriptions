@@ -16,7 +16,7 @@ const Navigation = styled.nav`
 
   @media (max-width: 480px) {
     position: sticky;
-    top: 0;
+    top: max(10vh, 60px);
     left: 0;
     right: 0;
     left: 0;
