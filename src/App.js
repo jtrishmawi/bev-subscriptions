@@ -26,27 +26,58 @@ const Header = styled.header`
 const Main = styled.main`
   overflow: scroll;
   display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+  padding: 3rem 0 0 0;
+  position: relative;
 
   h2 {
-    grid-column: 1/3;
+    position: absolute;
     font-size: 1.1rem;
+    height: 3rem;
     font-weight: bold;
-    text-align: center;
-    padding: 1rem;
-    height: 1.1rem;
-    line-height: 1.1rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
-  
-  @media (min-width: 640px) {
+
+  @media (max-width: 480px) {
     & {
-      grid-template-columns: repeat(auto-fill, minmax(640px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(100vw, 1fr));
     }
   }
+
+  /* @media (min-width: 480px) {
+    & {
+      grid-template-columns: repeat(
+        auto-fit,
+        minmax(480px, 1fr)
+      );
+    }
+  }
+
+  @media (min-width: 1025px) {
+    & {
+      grid-template-columns: repeat(
+        auto-fit,
+        minmax(1025px, 1fr)
+      );
+    }
+  }
+
+  @media (min-width: 1600px) {
+    & {
+      grid-template-columns: repeat(
+        auto-fit,
+        minmax(1600px, 1fr)
+      );
+    }
+  } */
 `;
 
 const lastYear = new Date();
-lastYear.setMonth(0)
-lastYear.setDate(1)
+lastYear.setMonth(0);
+lastYear.setDate(1);
 lastYear.setHours(0, 0, 0, 0);
 
 function App() {
@@ -58,7 +89,11 @@ function App() {
 
   useEffect(() => {
     (async () => {
-      const request = await fetch(process.env.NODE_ENV ===  "production" ? "https://cors-anywhere.herokuapp.com/http://www.bellevillenvrai.fr/api/forms" : "/api/forms");
+      const request = await fetch(
+        process.env.NODE_ENV === "production"
+          ? "https://cors-anywhere.herokuapp.com/http://www.bellevillenvrai.fr/api/forms"
+          : "/api/forms"
+      );
       const response = await request.json();
       const data = response.data
         .map((submission) => {
@@ -79,7 +114,11 @@ function App() {
         .sort(function (a, b) {
           return new Date(b.created_at) - new Date(a.created_at);
         })
-        .filter((item) => new Date(item.created_at) >= lastYear);
+        .filter((item) =>
+          process.env.NODE_ENV === "production"
+            ? new Date(item.created_at) >= lastYear
+            : true
+        );
 
       let itemsPerGroup = [];
       groupes.forEach(
@@ -107,7 +146,11 @@ function App() {
         <Selector handleChange={handleChange} selected={selected} />
       </Header>
       <Main>
-      <h2>Il y a {submissions[selected].length} inscris pour l'année {lastYear.getFullYear()}</h2>
+        <h2>
+          Il y a{` ${submissions[selected].length} `}
+          inscrits pour l'année
+          {` ${lastYear.getFullYear()}`}.
+        </h2>
         {submissions[selected].map((submission, key) => {
           return (
             <Card key={key} {...submission} displayGroup={selected === "all"} />

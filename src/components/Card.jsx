@@ -71,7 +71,7 @@ const Value = styled.dd`
   justify-content: flex-end;
 `;
 
-const JoueurValue = styled(Value)`
+const BigValue = styled(Value)`
   grid-column: 1/3;
   justify-content: space-between;
   align-items: center;
@@ -118,14 +118,14 @@ export const Card = ({ displayGroup, group, form_data, created_at }) => {
             <Value>{form_data.taille}</Value>
             <Label>Catégories</Label>
             {form_data.categories.map((categorie, i) => (
-              <Value key={i}>{categorie}</Value>
+              <BigValue key={i}>{categorie}</BigValue>
             ))}
             <Label>Horaires</Label>
             {form_data.horaires.map((horaire, i) => (
-              <Value key={i}>{horaire}</Value>
+              <BigValue key={i}>{horaire}</BigValue>
             ))}
             <Label>Commentaire</Label>
-            <Value>{form_data.addition}</Value>
+            <BigValue>{form_data.addition}</BigValue>
           </>
         );
       case "Artistes":
@@ -155,7 +155,7 @@ export const Card = ({ displayGroup, group, form_data, created_at }) => {
             <Value>{form_data.referent}</Value>
             <Label>Joueurs</Label>
             {form_data.joueurs.map((joueur, i) => (
-              <JoueurValue key={i}>
+              <BigValue key={i}>
                 <span>
                   {joueur.nom}
                   {joueur.capitaine === "Oui" && <FaUser />}
@@ -170,7 +170,7 @@ export const Card = ({ displayGroup, group, form_data, created_at }) => {
                     <FaPhone />
                   </a>
                 )}
-              </JoueurValue>
+              </BigValue>
             ))}
           </>
         );
