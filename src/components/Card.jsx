@@ -78,7 +78,7 @@ const BigValue = styled(Value)`
   text-align: left;
 
   span:first-child {
-    flex: 1 0 auto;
+    flex: 1 1 auto;
     text-align: left;
     
     svg {
@@ -87,7 +87,7 @@ const BigValue = styled(Value)`
   }
 
   span {
-    flex: 0 0 12ch;
+    flex: 0 1 12ch;
     padding-right: 1rem;
     text-align: right;
   }
@@ -120,7 +120,7 @@ export const Card = ({ displayGroup, group, form_data, created_at }) => {
             {form_data.categories.map((categorie, i) => (
               <BigValue key={i}>{categorie}</BigValue>
             ))}
-            <Label>Horaires</Label>
+            <Label>Disponibilités</Label>
             {form_data.horaires.map((horaire, i) => (
               <BigValue key={i}>{horaire}</BigValue>
             ))}

@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import { groupes } from "./constants";
 import { Loader } from "./components/Loader";
-import { Selector } from "./components/Selector";
+import { Navbar } from "./components/Navbar";
 import { Card } from "./components/Card";
 
 const Container = styled.div`
@@ -21,6 +21,20 @@ const Header = styled.header`
   justify-content: space-evenly;
   align-items: center;
   background: #f8f9fa;
+  text-transform: capitalize;
+  margin: 0 auto;
+  padding: 0 5vw;
+  z-index: 2;
+  align-self: center;
+
+  @media (max-width: 768px) {
+    position: sticky;
+    height: 8vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    left: 0;
+  }
 `;
 
 const Main = styled.main`
@@ -46,33 +60,6 @@ const Main = styled.main`
       grid-template-columns: repeat(auto-fit, minmax(100vw, 1fr));
     }
   }
-
-  /* @media (min-width: 480px) {
-    & {
-      grid-template-columns: repeat(
-        auto-fit,
-        minmax(480px, 1fr)
-      );
-    }
-  }
-
-  @media (min-width: 1025px) {
-    & {
-      grid-template-columns: repeat(
-        auto-fit,
-        minmax(1025px, 1fr)
-      );
-    }
-  }
-
-  @media (min-width: 1600px) {
-    & {
-      grid-template-columns: repeat(
-        auto-fit,
-        minmax(1600px, 1fr)
-      );
-    }
-  } */
 `;
 
 const lastYear = new Date();
@@ -133,22 +120,25 @@ function App() {
     })();
   }, [setSubmissions, setLoading]);
 
-  const handleChange = (e) => {
-    setSelected(e.target.value);
-    localStorage.setItem("bev-selection", e.target.value);
-  };
+  const handleChange = useCallback(
+    (value) => {
+      setSelected(value);
+      localStorage.setItem("bev-selection", value);
+    },
+    [setSelected]
+  );
 
   if (loading) return <Loader />;
 
   return (
     <Container>
       <Header>
-        <Selector handleChange={handleChange} selected={selected} />
+        <Navbar onChange={handleChange} />
       </Header>
       <Main>
         <h2>
           Il y a{` ${submissions[selected].length} `}
-          inscrits pour l'année
+          personnes inscrites pour l'année
           {` ${lastYear.getFullYear()}`}.
         </h2>
         {submissions[selected].map((submission, key) => {
