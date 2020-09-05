@@ -96,7 +96,7 @@ export const Navbar = ({ onChange }) => {
       setNavbarOpen(navbarOpen => navbarOpen ? !navbarOpen : false);
       onChange(value);
     },
-    [onChange, navbarOpen, setNavbarOpen]
+    [onChange, setNavbarOpen]
   );
 
   return (

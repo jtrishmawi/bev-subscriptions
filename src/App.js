@@ -13,30 +13,6 @@ const Container = styled.div`
   grid-template-rows: auto 1fr;
 `;
 
-const Header = styled.header`
-  height: 70px;
-  max-height: 10vh;
-  width: 100%;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  background: #f8f9fa;
-  text-transform: capitalize;
-  margin: 0 auto;
-  padding: 0 5vw;
-  z-index: 2;
-  align-self: center;
-
-  @media (max-width: 768px) {
-    position: sticky;
-    height: 8vh;
-    top: 0;
-    left: 0;
-    right: 0;
-    left: 0;
-  }
-`;
-
 const Main = styled.main`
   overflow: scroll;
   display: grid;
@@ -53,6 +29,8 @@ const Main = styled.main`
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
+    padding-top: 1rem;
   }
 
   @media (max-width: 480px) {
@@ -132,9 +110,7 @@ function App() {
 
   return (
     <Container>
-      <Header>
-        <Navbar onChange={handleChange} />
-      </Header>
+      <Navbar onChange={handleChange} />
       <Main>
         <h2>
           Il y a{` ${submissions[selected].length} `}
