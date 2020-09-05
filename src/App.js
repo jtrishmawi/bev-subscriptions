@@ -4,6 +4,7 @@ import { groupes } from "./constants";
 import { Loader } from "./components/Loader";
 import { Navbar } from "./components/Navbar";
 import { Card } from "./components/Card";
+import { Navigation } from "./components/Navigation";
 
 const Container = styled.div`
   height: 100vh;
@@ -76,9 +77,12 @@ function App() {
             form_data,
           };
         })
-        .sort(function (a, b) {
-          return new Date(b.created_at) - new Date(a.created_at);
-        })
+        .sort((a, b) =>
+          a.form_data.nom.trim().charAt(0).toLowerCase() >
+          b.form_data.nom.trim().charAt(0).toLowerCase()
+            ? 1
+            : -1
+        )
         .filter((item) =>
           process.env.NODE_ENV === "production"
             ? new Date(item.created_at) >= lastYear
@@ -123,6 +127,7 @@ function App() {
           );
         })}
       </Main>
+      <Navigation />
     </Container>
   );
 }

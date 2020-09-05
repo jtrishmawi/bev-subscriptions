@@ -3,8 +3,7 @@ import styled from "styled-components";
 import { Links } from "./Links";
 
 const Navigation = styled.nav`
-  height: 70px;
-  max-height: 10vh;
+  height: min(10vh, 70px);
   width: 100%;
   display: flex;
   background: #f8f9fa;

@@ -80,7 +80,7 @@ const BigValue = styled(Value)`
   span:first-child {
     flex: 1 1 auto;
     text-align: left;
-    
+
     svg {
       margin-left: 0.5rem;
     }
@@ -105,6 +105,8 @@ const Footer = styled.div`
   background: #f8f9fa;
   margin-top: auto;
 `;
+
+let previousLetter;
 
 export const Card = ({ displayGroup, group, form_data, created_at }) => {
   // console.log({ displayGroup, group, form_data, created_at });
@@ -185,9 +187,16 @@ export const Card = ({ displayGroup, group, form_data, created_at }) => {
         });
     }
   };
+  
+  let currentLetter = form_data.nom.charAt(0).toUpperCase();
+  let navigationId;
+  if (currentLetter !== previousLetter) {
+    navigationId = `data-navigation-${currentLetter}`;
+    previousLetter = currentLetter;
+  }
 
   return (
-    <Container>
+    <Container id={navigationId}>
       <Header>
         <h3>
           {`${form_data.nom.toUpperCase()} ${form_data.prenom || ""}`.trim()}
