@@ -33,11 +33,23 @@ const Item = styled.a`
 export const Navigation = () => {
   return (
     <Container>
-      {ALPHABET.map((letter) => (
-        <Item key={letter} href={`#data-navigation-${letter}`}>
-          {letter}
-        </Item>
-      ))}
+      {ALPHABET.map((letter) => {
+        return (
+          <Item
+            key={letter}
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              const element = document.getElementById(
+                `data-navigation-${letter}`
+              );
+              if (element) element.scrollIntoView({ behavior: "smooth" });
+            }}
+          >
+            {letter}
+          </Item>
+        );
+      })}
     </Container>
   );
 };
