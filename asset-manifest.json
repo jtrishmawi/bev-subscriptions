@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.js": "/bev-subscriptions/static/js/main.11fd8ca7.chunk.js",
-    "main.js.map": "/bev-subscriptions/static/js/main.11fd8ca7.chunk.js.map",
+    "main.js": "/bev-subscriptions/static/js/main.5a7fecd2.chunk.js",
+    "main.js.map": "/bev-subscriptions/static/js/main.5a7fecd2.chunk.js.map",
     "runtime-main.js": "/bev-subscriptions/static/js/runtime-main.34e75887.js",
     "runtime-main.js.map": "/bev-subscriptions/static/js/runtime-main.34e75887.js.map",
-    "static/js/2.51031fa2.chunk.js": "/bev-subscriptions/static/js/2.51031fa2.chunk.js",
-    "static/js/2.51031fa2.chunk.js.map": "/bev-subscriptions/static/js/2.51031fa2.chunk.js.map",
+    "static/js/2.c1fcf85a.chunk.js": "/bev-subscriptions/static/js/2.c1fcf85a.chunk.js",
+    "static/js/2.c1fcf85a.chunk.js.map": "/bev-subscriptions/static/js/2.c1fcf85a.chunk.js.map",
     "index.html": "/bev-subscriptions/index.html",
-    "precache-manifest.89f68d7cf2aa62e2d49046b6fb037ce0.js": "/bev-subscriptions/precache-manifest.89f68d7cf2aa62e2d49046b6fb037ce0.js",
+    "precache-manifest.250ca78254cb0cf8d445ecae90b1f651.js": "/bev-subscriptions/precache-manifest.250ca78254cb0cf8d445ecae90b1f651.js",
     "service-worker.js": "/bev-subscriptions/service-worker.js",
-    "static/js/2.51031fa2.chunk.js.LICENSE.txt": "/bev-subscriptions/static/js/2.51031fa2.chunk.js.LICENSE.txt"
+    "static/js/2.c1fcf85a.chunk.js.LICENSE.txt": "/bev-subscriptions/static/js/2.c1fcf85a.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.34e75887.js",
-    "static/js/2.51031fa2.chunk.js",
-    "static/js/main.11fd8ca7.chunk.js"
+    "static/js/2.c1fcf85a.chunk.js",
+    "static/js/main.5a7fecd2.chunk.js"
   ]
 }
