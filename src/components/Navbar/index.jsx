@@ -13,6 +13,14 @@ const Navigation = styled.nav`
   padding: 0 5vw;
   z-index: 2;
   align-self: center;
+
+  @media (max-width: 480px) {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    left: 0;
+  }
 `;
 
 const Toggle = styled.div`
