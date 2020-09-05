@@ -4,7 +4,7 @@ import { ALPHABET } from "../../constants";
 
 const Container = styled.div`
   position: absolute;
-  top: min(10vh, 70px);
+  top: max(10vh, 60px);
   bottom: 0;
   right: 0;
   background: #abcdef;
@@ -28,6 +28,13 @@ const Item = styled.a`
   text-decoration: none;
   outline: none;
   color: inherit;
+  font-size: 2vh;
+
+  @media screen and (orientation: landscape) {
+    & {
+      font-size: 2vw;
+    }
+  }
 `;
 
 export const Navigation = () => {

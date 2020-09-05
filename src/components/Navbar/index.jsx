@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Links } from "./Links";
 
 const Navigation = styled.nav`
-  height: min(10vh, 70px);
+  height: max(10vh, 60px);
   width: 100%;
   display: flex;
   background: #f8f9fa;
@@ -13,15 +13,6 @@ const Navigation = styled.nav`
   padding: 0 5vw;
   z-index: 2;
   align-self: center;
-
-  @media (max-width: 480px) {
-    position: sticky;
-    height: 8vh;
-    top: 0;
-    left: 0;
-    right: 0;
-    left: 0;
-  }
 `;
 
 const Toggle = styled.div`
