@@ -73,18 +73,26 @@ const Main = styled.main`
 
 function App() {
   const [state] = useData();
-  
+
   if (state?.submissions.all.length === 0) return <Loader />;
+
+  let headerText = `Il y a ${state.selected_submissions.length} inscriptions`;
+  if (state.search.length > 3) {
+    headerText = `Il y a ${
+      state.selected_submissions.length
+    } inscriptions visibles sur ${state.submissions[state.selected].length}`;
+  }
+  if (state.selected !== 'all') {
+    headerText += ` dans le groupe ${state.selected.charAt(0).toUpperCase() + state.selected.slice(1)}`
+  }
+
+  headerText += ` pour l'année ${state.lastYear.getFullYear()}.`;
 
   return (
     <Container>
       <Navbar />
       <Main>
-        <h2>
-          Il y a{` ${state.selected_submissions.length} `}
-          personnes inscrites pour l'année
-          {` ${state.lastYear.getFullYear()}`}.
-        </h2>
+        <h2>{headerText}</h2>
         {state.selected_submissions.map((submission, key) => {
           return (
             <Card
