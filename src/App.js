@@ -18,20 +18,19 @@ const Main = styled.main`
   overflow: scroll;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100vw, 1fr));
-  padding: 3rem 0 0 0;
   position: relative;
 
   h2 {
-    position: absolute;
+    position: sticky;
+    background: rgba(255, 255, 255, 0.5);
+    top: 0;
     font-size: 1.1rem;
     height: 3rem;
     font-weight: bold;
-    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding-top: 1rem;
   }
 
   /* Extra small devices (phones, 600px and down) */
@@ -42,21 +41,33 @@ const Main = styled.main`
   /* Small devices (portrait tablets and large phones, 600px and up) */
   @media only screen and (min-width: 600px) {
     grid-template-columns: repeat(auto-fill, minmax(calc(100vw / 2), 1fr));
+    h2 {
+      grid-column: 1 / 3;
+    }
   }
 
   /* Medium devices (landscape tablets, 768px and up) */
   @media only screen and (min-width: 768px) {
     grid-template-columns: repeat(auto-fill, minmax(calc(100vw / 3), 1fr));
+    h2 {
+      grid-column: 1 / 4;
+    }
   }
 
   /* Large devices (laptops/desktops, 992px and up) */
   @media only screen and (min-width: 992px) {
     grid-template-columns: repeat(auto-fill, minmax(calc(100vw / 4), 1fr));
+    h2 {
+      grid-column: 1 / 5;
+    }
   }
 
   /* Extra large devices (large laptops and desktops, 1200px and up) */
   @media only screen and (min-width: 1200px) {
     grid-template-columns: repeat(auto-fill, minmax(calc(100vw / 5), 1fr));
+    h2 {
+      grid-column: 1 / 6;
+    }
   }
 `;
 
