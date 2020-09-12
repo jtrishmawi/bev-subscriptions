@@ -7,7 +7,7 @@ const Container = styled.div`
   top: max(10vh, 60px);
   bottom: 0;
   right: 0;
-  background: rgba(0,0,0,0.25);
+  background: rgba(0, 0, 0, 0.25);
   color: white;
   display: flex;
   flex-direction: column;
@@ -50,7 +50,8 @@ export const Navigation = () => {
               const element = document.getElementById(
                 `data-navigation-${letter}`
               );
-              if (element) element.scrollIntoView({ behavior: "smooth" });
+              if (element)
+                element.scrollIntoView({ behavior: "smooth", block: "center" });
             }}
           >
             {letter}
