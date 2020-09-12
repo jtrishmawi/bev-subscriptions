@@ -15,6 +15,7 @@ const NavItem = styled.button`
   position: relative;
   font-size: 1.25rem;
   font-weight: ${(props) => (props.active ? "bold" : "normal")};
+  cursor: pointer;
 
   :after {
     position: absolute;
