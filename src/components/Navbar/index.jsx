@@ -52,7 +52,7 @@ const Navbox = styled.div`
     background-color: #f8f9fa;
     transition: all 0.3s ease-in;
     top: 8vh;
-    left: ${(props) => (props.open ? "-100%" : "0")};
+    left: ${(props) => (props.open ? "0" : "-100%")};
   }
 `;
 
@@ -88,8 +88,17 @@ const Hamburger = styled.div`
   }
 `;
 
+const Input = styled.input`
+  height: max(6vh, 40px);
+  border: 0;
+  color: #333;
+  outline: 0;
+  padding: 0 1.6rem;
+  border-radius: 0.5rem;
+`;
+
 export const Navbar = () => {
-  const [, { setSelected }] = useData();
+  const [{ search }, { setSelected, setSearch }] = useData();
   const [navbarOpen, setNavbarOpen] = useState(false);
 
   const handleChange = useCallback(
@@ -102,21 +111,17 @@ export const Navbar = () => {
 
   return (
     <Navigation>
-      <Toggle
-        navbarOpen={navbarOpen}
-        onClick={() => setNavbarOpen(!navbarOpen)}
-      >
-        {navbarOpen ? <Hamburger open /> : <Hamburger />}
+      <Toggle onClick={() => setNavbarOpen(!navbarOpen)}>
+        <Hamburger open={navbarOpen} />
       </Toggle>
-      {navbarOpen ? (
-        <Navbox>
-          <Links handleChange={handleChange} />
-        </Navbox>
-      ) : (
-        <Navbox open>
-          <Links handleChange={handleChange} />
-        </Navbox>
-      )}
+      <Navbox open={navbarOpen}>
+        <Links handleChange={handleChange} />
+        <Input
+          type="search"
+          onChange={(e) => setSearch(e.target.value)}
+          value={search}
+        />
+      </Navbox>
     </Navigation>
   );
 };

@@ -30,6 +30,13 @@ export const withData = (WrappedComponent) => {
       [dispatch]
     );
 
+    const setSearch = useCallback(
+      (search) => {
+        dispatch({ type: "set_search", payload: { search } });
+      },
+      [dispatch]
+    );
+
     useEffect(() => {
       (async () => {
         const request = await fetch(
@@ -86,6 +93,7 @@ export const withData = (WrappedComponent) => {
           {
             setSubmissions,
             setSelected,
+            setSearch
           },
         ]}
       >
