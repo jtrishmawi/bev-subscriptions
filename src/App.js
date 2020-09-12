@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
-import { groupes } from "./constants";
-import { Loader } from "./components/Loader";
+import React from "react";
 import { Navbar } from "./components/Navbar";
 import { Card } from "./components/Card";
 import { Navigation } from "./components/Navigation";
+import { useData, withData } from "./state";
+import { Loader } from "./components/Loader";
 
 const Container = styled.div`
   height: 100vh;
@@ -71,89 +71,27 @@ const Main = styled.main`
   }
 `;
 
-const lastYear = new Date();
-lastYear.setMonth(0);
-lastYear.setDate(1);
-lastYear.setHours(0, 0, 0, 0);
-
 function App() {
-  const [loading, setLoading] = useState(true);
-  const [submissions, setSubmissions] = useState({});
-  const [selected, setSelected] = useState(
-    localStorage.getItem("bev-selection") || "all"
-  );
-
-  useEffect(() => {
-    (async () => {
-      const request = await fetch(
-        process.env.NODE_ENV === "production"
-          ? "https://cors-anywhere.herokuapp.com/http://www.bellevillenvrai.fr/api/forms"
-          : "/api/forms"
-      );
-      const response = await request.json();
-      const data = response.data
-        .map((submission) => {
-          const form_data = JSON.parse(submission.form_data);
-          if (form_data.joueurs) {
-            const joueurs = JSON.parse(form_data.joueurs);
-            form_data.joueurs = joueurs.sort((a, b) =>
-              a.capitaine < b.capitaine || a.vice_capitaine < b.vice_capitaine
-                ? 1
-                : -1
-            );
-          }
-          return {
-            ...submission,
-            form_data,
-          };
-        })
-        .sort((a, b) =>
-          a.form_data.nom.trim().charAt(0).toLowerCase() >
-          b.form_data.nom.trim().charAt(0).toLowerCase()
-            ? 1
-            : -1
-        )
-        .filter((item) =>
-          process.env.NODE_ENV === "production"
-            ? new Date(item.created_at) >= lastYear
-            : true
-        );
-
-      let itemsPerGroup = [];
-      groupes.forEach(
-        (groupe) =>
-          (itemsPerGroup[groupe.key] = data.filter(
-            (sub) => sub.group === groupe.name
-          ))
-      );
-
-      setSubmissions({ all: data, ...itemsPerGroup });
-      setLoading(false);
-    })();
-  }, [setSubmissions, setLoading]);
-
-  const handleChange = useCallback(
-    (value) => {
-      setSelected(value);
-      localStorage.setItem("bev-selection", value);
-    },
-    [setSelected]
-  );
-
-  if (loading) return <Loader />;
+  const [state] = useData();
+  
+  if (state?.submissions.length === 0) return <Loader />;
 
   return (
     <Container>
-      <Navbar onChange={handleChange} selected={selected} />
+      <Navbar />
       <Main>
         <h2>
-          Il y a{` ${submissions[selected].length} `}
+          Il y a{` ${state.submissions[state.selected].length} `}
           personnes inscrites pour l'année
-          {` ${lastYear.getFullYear()}`}.
+          {` ${state.lastYear.getFullYear()}`}.
         </h2>
-        {submissions[selected].map((submission, key) => {
+        {state.submissions[state.selected].map((submission, key) => {
           return (
-            <Card key={key} {...submission} displayGroup={selected === "all"} />
+            <Card
+              key={key}
+              {...submission}
+              displayGroup={state.selected === "all"}
+            />
           );
         })}
       </Main>
@@ -162,4 +100,4 @@ function App() {
   );
 }
 
-export default App;
+export default withData(App);

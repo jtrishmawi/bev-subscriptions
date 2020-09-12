@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from "react";
 import styled from "styled-components";
 import { Links } from "./Links";
+import { useData } from "../../state";
 
 const Navigation = styled.nav`
   height: max(10vh, 60px);
@@ -87,15 +88,16 @@ const Hamburger = styled.div`
   }
 `;
 
-export const Navbar = ({ onChange }) => {
+export const Navbar = () => {
+  const [, { setSelected }] = useData();
   const [navbarOpen, setNavbarOpen] = useState(false);
 
   const handleChange = useCallback(
     (value) => {
-      setNavbarOpen(navbarOpen => navbarOpen ? !navbarOpen : false);
-      onChange(value);
+      setNavbarOpen((navbarOpen) => (navbarOpen ? !navbarOpen : false));
+      setSelected(value);
     },
-    [onChange, setNavbarOpen]
+    [setSelected, setNavbarOpen]
   );
 
   return (

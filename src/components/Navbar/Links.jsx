@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { groupes } from "../../constants";
+import { useData } from "../../state";
 
 const NavItem = styled.button`
   border: none;
@@ -13,14 +14,14 @@ const NavItem = styled.button`
   transition: all 200ms ease-in;
   position: relative;
   font-size: 1.25rem;
-  /* font-weight: ${(props) => (props.active ? "bold" : "normal")}; */
+  font-weight: ${(props) => (props.active ? "bold" : "normal")};
 
   :after {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    width: 0%;
+    width: ${(props) => (props.active ? "100%" : "0%")};
     content: ".";
     color: transparent;
     background: #333;
@@ -42,17 +43,18 @@ const NavItem = styled.button`
   }
 `;
 
-export const Links = ({ handleChange, selected = 'all' }) => {
+export const Links = ({ handleChange }) => {
+  const [{ selected }] = useData();
   return (
     <>
-      <NavItem onClick={() => handleChange("all")} active={selected}>
+      <NavItem onClick={() => handleChange("all")} active={selected === 'all'}>
         Tous
       </NavItem>
       {groupes.map((groupe) => (
         <NavItem
           key={groupe.key}
           onClick={() => handleChange(groupe.key)}
-          active={selected === 'groupe.key'}
+          active={selected === groupe.key}
         >
           {groupe.name}
         </NavItem>
