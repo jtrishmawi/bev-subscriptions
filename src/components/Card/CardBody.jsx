@@ -1,44 +1,14 @@
 import React, { Fragment } from "react";
 import styled from "styled-components";
 import {
-  FaPhone,
-  FaEnvelope,
   FaUser,
   FaUserFriends,
   FaSwimmer,
   FaRunning,
+  FaPhone,
+  FaSms,
 } from "react-icons/fa";
-import useDeviceDetect from "../utils/useDeviceDetect";
-
-const Container = styled.article`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  border: 1px solid #f8f9fa;
-  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.25);
-
-  a {
-    color: #333;
-    border: 1px solid #333;
-    padding: 0.5rem;
-    margin: 0.5rem;
-    border-radius: 50%;
-  }
-`;
-
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  background: #f8f9fa;
-  padding: 1rem 0.5rem;
-
-  h3 {
-    font-weight: bold;
-  }
-`;
+import useDeviceDetect from "../../utils/useDeviceDetect";
 
 const Body = styled.div`
   padding: 0.5rem 0.5rem 1rem;
@@ -69,6 +39,7 @@ const Value = styled.dd`
   height: auto;
   display: flex;
   justify-content: flex-end;
+  overflow-wrap: anywhere;
 `;
 
 const BigValue = styled(Value)`
@@ -97,21 +68,8 @@ const BigValue = styled(Value)`
   }
 `;
 
-const Footer = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  width: 100%;
-  background: #f8f9fa;
-  margin-top: auto;
-`;
-
-let previousLetter;
-
-export const Card = ({ displayGroup, group, form_data, created_at }) => {
-  // console.log({ displayGroup, group, form_data, created_at });
-  const {isMobile} = useDeviceDetect()
-
+export const CardBody = ({ form_data, group, created_at }) => {
+  const { isMobile } = useDeviceDetect();
   const renderBody = (group) => {
     switch (group) {
       case "Bénévoles":
@@ -138,12 +96,12 @@ export const Card = ({ displayGroup, group, form_data, created_at }) => {
             <Value>{form_data.categorie}</Value>
             <Label>Durée</Label>
             <Value>{form_data.duree}</Value>
-            <Label>Matériel</Label>
-            <Value>{form_data.materiel}</Value>
             <Label>Nombre</Label>
             <Value>{form_data.nombre}</Value>
+            <Label>Matériel</Label>
+            <BigValue>{form_data.materiel}</BigValue>
             <Label>Description</Label>
-            <Value>{form_data.description}</Value>
+            <BigValue>{form_data.description}</BigValue>
           </>
         );
       case "Participants":
@@ -168,10 +126,15 @@ export const Card = ({ displayGroup, group, form_data, created_at }) => {
                 </span>
                 <span>{joueur.taille}</span>
                 <span>{joueur.date_de_naissance}</span>
-                {joueur.coordonnees && (
+                {isMobile && joueur.coordonnees && (
+                  <>
                   <a href={`tel:${joueur.coordonnees}`}>
                     <FaPhone />
                   </a>
+                  <a href={`sms:${joueur.coordonnees}`}>
+                    <FaSms />
+                  </a>
+                  </>
                 )}
               </BigValue>
             ))}
@@ -188,43 +151,13 @@ export const Card = ({ displayGroup, group, form_data, created_at }) => {
         });
     }
   };
-  
-  let currentLetter = form_data.nom.charAt(0).toUpperCase();
-  let navigationId;
-  if (currentLetter !== previousLetter) {
-    navigationId = `data-navigation-${currentLetter}`;
-    previousLetter = currentLetter;
-  }
-
   return (
-    <Container id={navigationId}>
-      <Header>
-        <h3>
-          {`${form_data.nom.toUpperCase()} ${form_data.prenom || ""}`.trim()}
-        </h3>
-        {displayGroup && <p role="doc-subtitle">{group}</p>}
-      </Header>
-      <Body>
-        <List>
-          {renderBody(group)}
-          <Label>Inscription</Label>
-          <Value>{new Date(created_at).toLocaleString()}</Value>
-        </List>
-      </Body>
-      {isMobile && (form_data.telephone || form_data.email) && (
-        <Footer>
-          {form_data.telephone && (
-            <a href={`tel:${form_data.telephone}`}>
-              <FaPhone />
-            </a>
-          )}
-          {form_data.email && (
-            <a href={`mailto:${form_data.email}`}>
-              <FaEnvelope />
-            </a>
-          )}
-        </Footer>
-      )}
-    </Container>
+    <Body>
+      <List>
+        {renderBody(group)}
+        <Label>Inscription</Label>
+        <Value>{new Date(created_at).toLocaleString()}</Value>
+      </List>
+    </Body>
   );
 };

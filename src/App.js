@@ -74,18 +74,18 @@ const Main = styled.main`
 function App() {
   const [state] = useData();
   
-  if (state?.submissions.length === 0) return <Loader />;
+  if (state?.submissions.all.length === 0) return <Loader />;
 
   return (
     <Container>
       <Navbar />
       <Main>
         <h2>
-          Il y a{` ${state.submissions[state.selected].length} `}
+          Il y a{` ${state.selected_submissions.length} `}
           personnes inscrites pour l'année
           {` ${state.lastYear.getFullYear()}`}.
         </h2>
-        {state.submissions[state.selected].map((submission, key) => {
+        {state.selected_submissions.map((submission, key) => {
           return (
             <Card
               key={key}

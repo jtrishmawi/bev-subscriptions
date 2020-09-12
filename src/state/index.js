@@ -41,6 +41,7 @@ export const withData = (WrappedComponent) => {
         const data = response.data
           .map((submission) => {
             const form_data = JSON.parse(submission.form_data);
+            form_data.nom = form_data.nom.trim()
             if (form_data.joueurs) {
               const joueurs = JSON.parse(form_data.joueurs);
               form_data.joueurs = joueurs.sort((a, b) =>
@@ -76,7 +77,7 @@ export const withData = (WrappedComponent) => {
 
         setSubmissions({ all: data, ...itemsPerGroup });
       })();
-    }, []);
+    }, [setSubmissions, state.lastYear]);
 
     return (
       <StateContext.Provider
