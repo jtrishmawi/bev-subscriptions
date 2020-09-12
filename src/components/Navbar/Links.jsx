@@ -13,6 +13,7 @@ const NavItem = styled.button`
   transition: all 200ms ease-in;
   position: relative;
   font-size: 1.25rem;
+  /* font-weight: ${(props) => (props.active ? "bold" : "normal")}; */
 
   :after {
     position: absolute;
@@ -41,12 +42,18 @@ const NavItem = styled.button`
   }
 `;
 
-export const Links = ({ handleChange }) => {
+export const Links = ({ handleChange, selected = 'all' }) => {
   return (
     <>
-      <NavItem onClick={() => handleChange("all")}>Tous</NavItem>
+      <NavItem onClick={() => handleChange("all")} active={selected}>
+        Tous
+      </NavItem>
       {groupes.map((groupe) => (
-        <NavItem key={groupe.key} onClick={() => handleChange(groupe.key)}>
+        <NavItem
+          key={groupe.key}
+          onClick={() => handleChange(groupe.key)}
+          active={selected === 'groupe.key'}
+        >
           {groupe.name}
         </NavItem>
       ))}

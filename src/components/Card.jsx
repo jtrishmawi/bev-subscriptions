@@ -10,7 +10,6 @@ import {
 } from "react-icons/fa";
 
 const Container = styled.article`
-  margin: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

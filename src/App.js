@@ -17,7 +17,7 @@ const Container = styled.div`
 const Main = styled.main`
   overflow: scroll;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(100vw, 1fr));
   padding: 3rem 0 0 0;
   position: relative;
 
@@ -34,10 +34,29 @@ const Main = styled.main`
     padding-top: 1rem;
   }
 
-  @media (max-width: 480px) {
-    & {
-      grid-template-columns: repeat(auto-fit, minmax(100vw, 1fr));
-    }
+  /* Extra small devices (phones, 600px and down) */
+  @media only screen and (max-width: 600px) {
+    grid-template-columns: repeat(auto-fit, minmax(100vw, 1fr));
+  }
+
+  /* Small devices (portrait tablets and large phones, 600px and up) */
+  @media only screen and (min-width: 600px) {
+    grid-template-columns: repeat(auto-fill, minmax(calc(100vw / 2), 1fr));
+  }
+
+  /* Medium devices (landscape tablets, 768px and up) */
+  @media only screen and (min-width: 768px) {
+    grid-template-columns: repeat(auto-fill, minmax(calc(100vw / 3), 1fr));
+  }
+
+  /* Large devices (laptops/desktops, 992px and up) */
+  @media only screen and (min-width: 992px) {
+    grid-template-columns: repeat(auto-fill, minmax(calc(100vw / 4), 1fr));
+  }
+
+  /* Extra large devices (large laptops and desktops, 1200px and up) */
+  @media only screen and (min-width: 1200px) {
+    grid-template-columns: repeat(auto-fill, minmax(calc(100vw / 5), 1fr));
   }
 `;
 
@@ -114,7 +133,7 @@ function App() {
 
   return (
     <Container>
-      <Navbar onChange={handleChange} />
+      <Navbar onChange={handleChange} selected={selected} />
       <Main>
         <h2>
           Il y a{` ${submissions[selected].length} `}

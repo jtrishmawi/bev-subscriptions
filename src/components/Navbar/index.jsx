@@ -13,6 +13,7 @@ const Navigation = styled.nav`
   padding: 0 5vw;
   z-index: 2;
   align-self: center;
+  padding: 0;
 
   @media (max-width: 480px) {
     position: sticky;
