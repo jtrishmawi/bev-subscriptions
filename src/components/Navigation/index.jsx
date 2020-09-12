@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { ALPHABET } from "../../constants";
 
 const Container = styled.div`
-  position: absolute;
+  position: sticky;
   top: max(10vh, 60px);
   bottom: 0;
   right: 0;
