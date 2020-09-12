@@ -50,8 +50,6 @@ const reducer = (state, action) => {
         selected_submissions = fuse
           .search(action.payload.search, {
             minMatchCharLength: 3,
-            shouldSort: false,
-            findAllMatches: true,
           })
           .map((result) => result.item);
       }

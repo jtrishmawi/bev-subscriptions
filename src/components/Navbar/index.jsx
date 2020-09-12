@@ -2,6 +2,7 @@ import React, { useState, useCallback } from "react";
 import styled from "styled-components";
 import { Links } from "./Links";
 import { useData } from "../../state";
+import { Search } from "../Search";
 
 const Navigation = styled.nav`
   height: max(10vh, 60px);
@@ -88,17 +89,8 @@ const Hamburger = styled.div`
   }
 `;
 
-const Input = styled.input`
-  height: max(6vh, 40px);
-  border: 0;
-  color: #333;
-  outline: 0;
-  padding: 0 1.6rem;
-  border-radius: 0.5rem;
-`;
-
 export const Navbar = () => {
-  const [{ search }, { setSelected, setSearch }] = useData();
+  const [, { setSelected }] = useData();
   const [navbarOpen, setNavbarOpen] = useState(false);
 
   const handleChange = useCallback(
@@ -116,11 +108,7 @@ export const Navbar = () => {
       </Toggle>
       <Navbox open={navbarOpen}>
         <Links handleChange={handleChange} />
-        <Input
-          type="search"
-          onChange={(e) => setSearch(e.target.value)}
-          value={search}
-        />
+        <Search setNavbarOpen={setNavbarOpen} />
       </Navbox>
     </Navigation>
   );
