@@ -7,7 +7,7 @@ const Container = styled.div`
   top: max(10vh, 60px);
   bottom: 0;
   right: 0;
-  background: #abcdef;
+  background: rgba(0,0,0,0.25);
   color: white;
   display: flex;
   flex-direction: column;
