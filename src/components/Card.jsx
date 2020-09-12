@@ -8,6 +8,7 @@ import {
   FaSwimmer,
   FaRunning,
 } from "react-icons/fa";
+import useDeviceDetect from "../utils/useDeviceDetect";
 
 const Container = styled.article`
   display: flex;
@@ -109,6 +110,7 @@ let previousLetter;
 
 export const Card = ({ displayGroup, group, form_data, created_at }) => {
   // console.log({ displayGroup, group, form_data, created_at });
+  const {isMobile} = useDeviceDetect()
 
   const renderBody = (group) => {
     switch (group) {
@@ -209,7 +211,7 @@ export const Card = ({ displayGroup, group, form_data, created_at }) => {
           <Value>{new Date(created_at).toLocaleString()}</Value>
         </List>
       </Body>
-      {(form_data.telephone || form_data.email) && (
+      {isMobile && (form_data.telephone || form_data.email) && (
         <Footer>
           {form_data.telephone && (
             <a href={`tel:${form_data.telephone}`}>
