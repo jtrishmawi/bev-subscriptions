@@ -20,18 +20,18 @@ const Container = styled.div`
 `;
 
 export const Profile = () => {
-  const { user, isAuthenticated, isLoading, ...rest } = useAuth0();
-  console.log({ user, isAuthenticated, isLoading, rest });
+  const { user, isAuthenticated, isLoading } = useAuth0();
 
   if (isLoading) {
-    return <div>Loading ...</div>;
+    return <div>...</div>;
   }
 
-  if (!isAuthenticated) return <LoginButton />;
   return (
     <Container>
-      <img src={user.picture} alt={user.name} height={48} width={48} />
-      <LogoutButton />
+      {isAuthenticated && (
+        <img src={user.picture} alt={user.name} height={48} width={48} />
+      )}
+      {isAuthenticated ? <LogoutButton /> : <LoginButton />}
     </Container>
   );
 };

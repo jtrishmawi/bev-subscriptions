@@ -57,7 +57,6 @@ export const Search = ({ setNavbarOpen }) => {
   useEffect(
     () => {
       if (debouncedSearchTerm) {
-        console.log({ debouncedSearchTerm });
         setSearch(debouncedSearchTerm);
       } else {
         setSearch("");

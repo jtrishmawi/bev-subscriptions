@@ -31,27 +31,13 @@ const reducer = (state, action) => {
     case "set_search":
       let selected_submissions = state.submissions[state.selected];
       const fuse = new Fuse(selected_submissions, {
-        keys: [
-          "form_data.taille",
-          "form_data.categories",
-          "form_data.horaires",
-          "form_data.addition",
-          "form_data.categorie",
-          "form_data.duree",
-          "form_data.nombre",
-          "form_data.materiel",
-          "form_data.description",
-          "form_data.quartier",
-          "form_data.referent",
-          "form_data.joueurs.nom",
-        ],
+        keys: ["form_data.nom", "form_data.prenom"],
+      });
+      const search = fuse.search(action.payload.search, {
+        minMatchCharLength: 3,
       });
       if (action.payload.search.length >= 3) {
-        selected_submissions = fuse
-          .search(action.payload.search, {
-            minMatchCharLength: 3,
-          })
-          .map((result) => result.item);
+        selected_submissions = search.map((result) => result.item);
       }
       return {
         ...state,
