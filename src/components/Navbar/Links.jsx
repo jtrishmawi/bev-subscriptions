@@ -3,6 +3,20 @@ import styled from "styled-components";
 import { groupes } from "../../constants";
 import { useData } from "../../state";
 
+const Container = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  align-items: center;
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    background-color: #f8f9fa;
+    transition: all 0.3s ease-in;
+    top: 8vh;
+  }
+`;
+
 const NavItem = styled.button`
   border: none;
   outline: none;
@@ -47,8 +61,8 @@ const NavItem = styled.button`
 export const Links = ({ handleChange }) => {
   const [{ selected }] = useData();
   return (
-    <>
-      <NavItem onClick={() => handleChange("all")} active={selected === 'all'}>
+    <Container>
+      <NavItem onClick={() => handleChange("all")} active={selected === "all"}>
         Tous
       </NavItem>
       {groupes.map((groupe) => (
@@ -60,6 +74,6 @@ export const Links = ({ handleChange }) => {
           {groupe.name}
         </NavItem>
       ))}
-    </>
+    </Container>
   );
 };

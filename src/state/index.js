@@ -7,6 +7,7 @@ import React, {
 } from "react";
 import reducer, { initialState } from "./reducer";
 import { groupes } from "../constants";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const StateContext = createContext();
 
@@ -14,6 +15,7 @@ export const withData = (WrappedComponent) => {
   const StateContextProvider = (props) => {
     // initialize state
     const [state, dispatch] = useReducer(reducer, initialState);
+    const { isAuthenticated } = useAuth0();
 
     // add actions
     const setSubmissions = useCallback(
@@ -24,10 +26,13 @@ export const withData = (WrappedComponent) => {
 
     const setSelected = useCallback(
       (selected) => {
-        localStorage.setItem("bev-selection", selected);
+        localStorage.removeItem('bev-selection')
+        if(isAuthenticated) {
+          localStorage.setItem("bev-selection", selected);
+        }
         dispatch({ type: "set_selected", payload: { selected } });
       },
-      [dispatch]
+      [dispatch, isAuthenticated]
     );
 
     const setSearch = useCallback(
@@ -39,6 +44,7 @@ export const withData = (WrappedComponent) => {
 
     useEffect(() => {
       (async () => {
+        if (!isAuthenticated) return;
         const request = await fetch(process.env.REACT_APP_API_URL);
         const response = await request.json();
         const data = response.data
@@ -65,7 +71,7 @@ export const withData = (WrappedComponent) => {
               : -1
           )
           .filter((item) =>
-            process.env.REACT_APP_SHOW_THIS_YEAR_ONLY === 'true'
+            process.env.REACT_APP_SHOW_THIS_YEAR_ONLY === "true"
               ? new Date(item.created_at) >= state.lastYear
               : true
           );
@@ -80,7 +86,7 @@ export const withData = (WrappedComponent) => {
 
         setSubmissions({ all: data, ...itemsPerGroup });
       })();
-    }, [setSubmissions, state.lastYear]);
+    }, [isAuthenticated, setSubmissions, state.lastYear]);
 
     return (
       <StateContext.Provider

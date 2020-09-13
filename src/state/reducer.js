@@ -19,13 +19,13 @@ const reducer = (state, action) => {
       return {
         ...state,
         submissions: action.payload.submissions,
-        selected_submissions: action.payload.submissions[state.selected],
+        selected_submissions: action.payload.submissions[state.selected] || [],
       };
     case "set_selected":
       return {
         ...state,
         selected: action.payload.selected,
-        selected_submissions: state.submissions[action.payload.selected],
+        selected_submissions: state.submissions[action.payload.selected] || [],
         search: "",
       };
     case "set_search":
