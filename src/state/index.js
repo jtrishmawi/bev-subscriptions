@@ -39,16 +39,12 @@ export const withData = (WrappedComponent) => {
 
     useEffect(() => {
       (async () => {
-        const request = await fetch(
-          process.env.NODE_ENV === "production"
-            ? "https://cors-anywhere.herokuapp.com/http://www.bellevillenvrai.fr/api/forms"
-            : "/api/forms"
-        );
+        const request = await fetch(process.env.REACT_APP_API_URL);
         const response = await request.json();
         const data = response.data
           .map((submission) => {
             const form_data = JSON.parse(submission.form_data);
-            form_data.nom = form_data.nom.trim()
+            form_data.nom = form_data.nom.trim();
             if (form_data.joueurs) {
               const joueurs = JSON.parse(form_data.joueurs);
               form_data.joueurs = joueurs.sort((a, b) =>
@@ -69,7 +65,7 @@ export const withData = (WrappedComponent) => {
               : -1
           )
           .filter((item) =>
-            process.env.NODE_ENV === "production"
+            process.env.REACT_APP_SHOW_THIS_YEAR_ONLY === 'true'
               ? new Date(item.created_at) >= state.lastYear
               : true
           );
@@ -93,7 +89,7 @@ export const withData = (WrappedComponent) => {
           {
             setSubmissions,
             setSelected,
-            setSearch
+            setSearch,
           },
         ]}
       >
