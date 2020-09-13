@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Links } from "./Links";
 import { useData } from "../../state";
 import { Search } from "../Search";
+import useDeviceDetect from "../../utils/useDeviceDetect";
 
 const Navigation = styled.nav`
   height: max(10vh, 60px);
@@ -92,6 +93,7 @@ const Hamburger = styled.div`
 export const Navbar = () => {
   const [, { setSelected }] = useData();
   const [navbarOpen, setNavbarOpen] = useState(false);
+  const { isMobile } = useDeviceDetect();
 
   const handleChange = useCallback(
     (value) => {
@@ -107,8 +109,9 @@ export const Navbar = () => {
         <Hamburger open={navbarOpen} />
       </Toggle>
       <Navbox open={navbarOpen}>
+        {isMobile && <Search setNavbarOpen={setNavbarOpen} />}
         <Links handleChange={handleChange} />
-        <Search setNavbarOpen={setNavbarOpen} />
+        {!isMobile && <Search setNavbarOpen={setNavbarOpen} />}
       </Navbox>
     </Navigation>
   );
