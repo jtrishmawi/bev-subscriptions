@@ -26,7 +26,7 @@ ReactDOM.render(
     <Auth0Provider
       domain="dev-u2clydb2.eu.auth0.com"
       clientId="a3mi01imTynRP8aUUtYPHVm3taGPgi87"
-      redirectUri={window.location.origin}
+      redirectUri={process.env.REACT_APP_REDIRECT_URI}
     >
       <App />
     </Auth0Provider>
