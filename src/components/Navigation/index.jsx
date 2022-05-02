@@ -50,8 +50,17 @@ export const Navigation = () => {
               const element = document.getElementById(
                 `data-navigation-${letter}`
               );
-              if (element)
+              if (element) {
+                let show = false;
+                if (window.getComputedStyle(element).display === "none") {
+                  show = true;
+                  element.style.display = "block";
+                }
                 element.scrollIntoView({ behavior: "smooth", block: "center" });
+                if (show) {
+                  element.style.display = "none";
+                }
+              }
             }}
           >
             {letter}
