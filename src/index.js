@@ -4,7 +4,6 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
-import { Auth0Provider } from "@auth0/auth0-react";
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -23,13 +22,7 @@ const GlobalStyle = createGlobalStyle`
 ReactDOM.render(
   <React.StrictMode>
     <GlobalStyle />
-    <Auth0Provider
-      domain="dev-u2clydb2.eu.auth0.com"
-      clientId="a3mi01imTynRP8aUUtYPHVm3taGPgi87"
-      redirectUri={process.env.REACT_APP_REDIRECT_URI}
-    >
-      <App />
-    </Auth0Provider>
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );
