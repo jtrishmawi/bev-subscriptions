@@ -75,7 +75,7 @@ const Main = styled.main`
 function App() {
   const [state] = useData();
 
-  if (!state.selected_submissions || !state.selected_submissions.length) return <Loader />;
+  if (!state.selected_submissions) return <Loader />;
 
   let headerText = `Il y a ${state.selected_submissions.length} inscriptions`;
   if (state.search.length > 3) {
