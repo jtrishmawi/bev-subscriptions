@@ -29,7 +29,7 @@ const reducer = (state, action) => {
         search: "",
       };
     case "set_search":
-      let selected_submissions = state.submissions[state.selected];
+      let selected_submissions = state.submissions[state.selected] || [];
       const fuse = new Fuse(selected_submissions, {
         keys: ["form_data.nom", "form_data.prenom"],
       });
