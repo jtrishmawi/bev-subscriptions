@@ -5,7 +5,6 @@ import { Card } from "./components/Card";
 import { Navigation } from "./components/Navigation";
 import { useData, withData } from "./state";
 import { Loader } from "./components/Loader";
-import { useAuth0 } from "@auth0/auth0-react";
 
 const Container = styled.div`
   height: 100vh;
@@ -75,32 +74,27 @@ const Main = styled.main`
 
 function App() {
   const [state] = useData();
-  const { isLoading, isAuthenticated } = useAuth0();
 
-  if (isLoading) return <Loader />;
+  if (!state.selected_submissions) return <Loader />;
 
-  let headerText
-  if (isAuthenticated) {
-    headerText = `Il y a ${state.selected_submissions.length} inscriptions`;
-    if (state.search.length > 3) {
-      headerText = `Il y a ${
-        state.selected_submissions.length
-      } inscriptions visibles sur ${state.submissions[state.selected].length}`;
-    }
-    if (state.selected !== "all") {
-      headerText += ` dans le groupe ${
-        state.selected.charAt(0).toUpperCase() + state.selected.slice(1)
-      }`;
-    }
-    headerText += ` pour l'année ${state.lastYear.getFullYear()}.`;
+  let headerText = `Il y a ${state.selected_submissions.length} inscriptions`;
+  if (state.search.length > 3) {
+    headerText = `Il y a ${
+      state.selected_submissions.length
+    } inscriptions visibles sur ${state.submissions[state.selected].length}`;
   }
-
+  if (state.selected !== "all") {
+    headerText += ` dans le groupe ${
+      state.selected.charAt(0).toUpperCase() + state.selected.slice(1)
+    }`;
+  }
+  headerText += ` pour l'année ${state.lastYear.getFullYear()}.`;
 
   return (
     <Container>
       <Navbar />
       <Main>
-        {isAuthenticated && <h2>{headerText}</h2>}
+        <h2>{headerText}</h2>
         {state.selected_submissions.map((submission, key) => {
           return (
             <Card
@@ -110,11 +104,6 @@ function App() {
             />
           );
         })}
-        {!isAuthenticated && (
-          <h2>
-            Connectez-vous ou demandez les accés aux personnes concernées.
-          </h2>
-        )}
       </Main>
       <Navigation />
     </Container>

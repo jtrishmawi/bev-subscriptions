@@ -3,7 +3,6 @@ import { Links } from "./Links";
 import { useData } from "../../state";
 import useDeviceDetect from "../../utils/useDeviceDetect";
 import { Search } from "../Search";
-import { Profile } from "./Profile";
 import { Navigation } from "./Navigation";
 import { Toggle } from "./Toggle";
 import { Navbox } from "./Navbox";
@@ -26,10 +25,8 @@ export const Navbar = () => {
     <Navigation>
       <Toggle onClick={() => setNavbarOpen(!navbarOpen)}>
         <Hamburger open={navbarOpen} />
-        {isMobile && <Profile />}
       </Toggle>
       <Navbox open={navbarOpen}>
-        {!isMobile && <Profile />}
         {isMobile && <Search setNavbarOpen={setNavbarOpen} />}
         <Links handleChange={handleChange} />
         {!isMobile && <Search setNavbarOpen={setNavbarOpen} />}
