@@ -7,6 +7,7 @@ import React, {
 } from "react";
 import reducer, { initialState } from "./reducer";
 import { groupes } from "../constants";
+import { isAfter } from "date-fns";
 
 const StateContext = createContext();
 
@@ -63,17 +64,21 @@ export const withData = (WrappedComponent) => {
             ? 1
             : -1
         );
-        data.filter((item) => new Date(item.created_at) >= state.lastYear);
+        const filteredData = data.filter((item) =>
+          process.env.REACT_APP_SHOW_THIS_YEAR_ONLY === "true"
+            ? isAfter(new Date(item.created_at), state.lastYear)
+            : true
+        );
 
         let itemsPerGroup = [];
         groupes.forEach(
           (groupe) =>
-            (itemsPerGroup[groupe.key] = data.filter(
+            (itemsPerGroup[groupe.key] = filteredData.filter(
               (sub) => sub.group === groupe.name
             ))
         );
 
-        setSubmissions({ all: data, ...itemsPerGroup });
+        setSubmissions({ all: filteredData, ...itemsPerGroup });
       })();
     }, [setSubmissions, state.lastYear]);
 
