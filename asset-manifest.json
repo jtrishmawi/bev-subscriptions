@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/bev-subscriptions/static/js/main.d0cafae2.js",
+    "main.js": "/bev-subscriptions/static/js/main.596d06d6.js",
     "index.html": "/bev-subscriptions/index.html",
-    "main.d0cafae2.js.map": "/bev-subscriptions/static/js/main.d0cafae2.js.map"
+    "main.596d06d6.js.map": "/bev-subscriptions/static/js/main.596d06d6.js.map"
   },
   "entrypoints": [
-    "static/js/main.d0cafae2.js"
+    "static/js/main.596d06d6.js"
   ]
 }
