@@ -63,11 +63,7 @@ export const withData = (WrappedComponent) => {
             ? 1
             : -1
         );
-        data.filter((item) =>
-          process.env.REACT_APP_SHOW_THIS_YEAR_ONLY === "true"
-            ? new Date(item.created_at) >= state.lastYear
-            : true
-        );
+        data.filter((item) => new Date(item.created_at) >= state.lastYear);
 
         let itemsPerGroup = [];
         groupes.forEach(
